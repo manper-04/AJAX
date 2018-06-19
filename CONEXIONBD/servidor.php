@@ -1,8 +1,8 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","clientesdb");
+$con = mysqli_connect("localhost","root","","ELNOMBREDETUBASEDEDATOS");
 
-$resultado = mysqli_query($con, "select * from tusuarios");
+$resultado = mysqli_query($con, "select * from ELNOMBREDETUTABLA");
 $usuariosdb = "";
 
 $usuariosdb .= "<table>";
