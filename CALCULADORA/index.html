@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    Primer Numero: <input type="text" id="n1"><br><br>
+    Segundo Numero: <input type="text" id="n2"><br><br>
+
+
+    <button onclick="ejecutarAJAX();">Hazme Click!</button>
+
+  <div id="info"></div>
+
+  <script>
+
+    var resultado = document.getElementById('info');
+
+    function ejecutarAJAX(){
+
+      var xmlhttp;
+
+      if(window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+      }else{
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+
+      var a = document.getElementById('n1').value;
+      var b = document.getElementById('n2').value;
+
+      var cadena = "num1=" + a + "&num2=" + b;
+
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
+          resultado.innerHTML = xmlhttp.responseText;
+
+        }
+      }
+
+      xmlhttp.open("GET","servidor.php?" + cadena,true);
+      xmlhttp.send();
+
+
+
+    }
+
+
+
+
+
+  </script>
+
+
+
+  </body>
+</html>

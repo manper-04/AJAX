@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <button onclick="ajax_get_json();">Hazme Click!</button>
+
+  <div id="info"></div>
+
+  <script>
+
+    var resultado = document.getElementById('info');
+
+    function ajax_get_json(){
+
+      var xmlhttp;
+
+      if(window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+      }else{
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
+          var datos = JSON.parse(xmlhttp.responseText);
+
+          var edadMenor = encontrarEdadMenor(datos);
+          resultado.innerHTML += "La edad menor es: " + edadMenor;
+
+
+
+
+        }
+      }
+
+      xmlhttp.open("GET","datos.json",true);
+      xmlhttp.send();
+
+    }
+
+    function encontrarEdadMenor(objetoJSON){
+      var arreglo = [];
+      for(var i in objetoJSON){
+        var persona = objetoJSON[i];
+        arreglo.push(persona.edad);
+
+
+      }
+
+      // var edadMenor = arreglo[0];
+      //
+      // for(var j = 0 ; j < arreglo.length; j++){
+      //   if(arreglo[j] < edadMenor){
+      //     edadMenor = arreglo[j];
+      //
+      //   }
+      // }
+
+      var edadMenor = Math.min.apply(null, arreglo);
+
+      return edadMenor;
+
+    }
+
+
+
+  </script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <button onclick="ajax_get_json();">Mostrar Datos</button>
+
+    <div id="info">
+
+    </div>
+
+    <script type="text/javascript">
+
+    var resultado = document.getElementById('info');
+
+    function ajax_get_json(){
+      var xmlHttp;
+      if(window.XMLHttpRequest){
+        xmlHttp = new XMLHttpRequest();
+      }
+
+      xmlHttp.onreadystatechange = function(){
+        if(xmlHttp.readyState === 4 && xmlHttp.status === 200){
+            var datos = JSON.parse(xmlHttp.responseText);
+
+          for(var i in datos){
+            resultado.innerHTML += datos[i].nombre + " " + datos[i].apellido + " Tiene: " + datos[i].edad + "<hr/>";
+
+          }
+
+
+
+
+        }
+      }
+
+      xmlHttp.open("GET","datos.json",true);
+      xmlHttp.send();
+
+    }
+
+
+
+    </script>
+
+  </body>
+</html>

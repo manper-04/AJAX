@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    Nombre: <input type="text" id="txtNombre"><br><br>
+    Apellido: <input type="text" id="txtApellido"><br><br>
+
+
+    <button type="submit" onclick="ajax_post();">Hazme Click!</button>
+
+  <div id="info"></div>
+
+  <script>
+
+    var resultado = document.getElementById('info');
+
+    function ajax_post(){
+
+      var xmlhttp;
+
+      if(window.XMLHttpRequest){
+        xmlhttp = new XMLHttpRequest();
+      }else{
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      var a = document.getElementById('txtNombre').value;
+      var b = document.getElementById('txtApellido').value;
+      var informacionUsuario = "txtNombre=" + a + "&txtApellido=" + b;
+
+
+
+      xmlhttp.onreadystatechange = function(){
+        if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
+          var mensaje = xmlhttp.responseText;
+          resultado.innerHTML = mensaje;
+
+        }
+      }
+
+      xmlhttp.open("POST","servidor.php",true);
+      xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+      xmlhttp.send(informacionUsuario);
+
+    }
+
+
+
+
+
+  </script>
+
+
+
+  </body>
+</html>

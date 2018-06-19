@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Curso AJAX</title>
+  </head>
+  <body>
+    <button onclick="ejecutarAjax();">Click</button>
+
+    <div id="info">
+
+    </div>
+
+    <script type="text/javascript">
+
+    function ejecutarAjax(){
+
+      // 0 Inicializada
+      // 1 Establecida
+      // 2 Enviada
+      // 3 Procesada
+      // 4 Finalziada
+
+    var ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function(){
+      if(ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
+        document.getElementById('info').innerHTML = ajaxRequest.responseText;
+
+      }
+    }
+
+    ajaxRequest.open("GET","documento.txt",true);
+    ajaxRequest.send();
+
+    }
+
+    </script>
+
+
+  </body>
+</html>
