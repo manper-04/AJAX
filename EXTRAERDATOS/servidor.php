@@ -1,11 +1,11 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","clientesdb");
+$con = mysqli_connect("localhost","root","","ELNOMBREDETUBASEDEDATOS");
 
 $usuario = $_GET["usuario"];
 $usuario = (int)$usuario;
 
-$resultado = mysqli_query($con,"select * from tusuarios where id = $usuario");
+$resultado = mysqli_query($con,"select * from ELNOMBREDETUTABLA where id = $usuario");
 
 
 
