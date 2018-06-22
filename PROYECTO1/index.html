@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style>
+    .miClase{
+      color:blue;
+    }
+
+    button{
+      padding: 15px;
+      margin-left: 42%;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    div#overlay{
+      display:none;
+      z-index: 2;
+      background: #000000;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      text-align: center;
+    }
+
+    div#informacionUsuario{
+      display: none;
+      position: relative;
+      z-index: 3;
+      margin: 100px auto 0px auto;
+      width: 400px;
+      height: 250px;
+      background: #ffffff;
+      color:#000000;
+      border: 4px solid #cccccc;
+      font-size: 18px;
+    }
+
+    div#wrapper{
+      position: absolute;
+      top: 40px;
+
+    }
+
+    #info{
+      padding: 20px;
+    }
+    #titulo{
+      width: 100%;
+      height: 12%;
+      background: #e9e9e9;
+      padding: -20px;
+      text-align: center;
+      font-family: arial;
+      font-size: 18px;
+      padding-top: 15px;
+
+    }
+
+  </style>
+  <body onload="mostrarClientes();">
+
+    <form>
+      Buscar cliente: <input type="text" id="texto" placeholder="Ingresar nombre" onkeyup="buscarUsuario(this.value);">
+    </form>
+
+<div id="wrapper">
+    <div id="mostrar"></div>
+</div>
+
+
+<div id="overlay"></div>
+
+<div id="informacionUsuario">
+    <div id="titulo">Informacion Personal</div>
+    <p id="info"></p>
+    <button onclick="toggleOverlay(this);">Cerrar</button>
+
+</div>
+
+
+    <script type="text/javascript">
+
+    var resultado = document.getElementById('mostrar');
+
+    function mostrarClientes(){
+
+      var xmlHttp;
+      if(window.XMLHttpRequest){
+        xmlHttp = new XMLHttpRequest();
+      }
+
+    xmlHttp.onreadystatechange = function(){
+      if(xmlHttp.readyState === 4 && xmlHttp.status === 200){
+      resultado.innerHTML = xmlHttp.responseText;
+
+      }
+
+    }
+
+
+    xmlHttp.open("GET","servidor.php",true);
+    xmlHttp.send();
+
+    }
+
+    function buscarUsuario(nombre){
+
+      var xmlHttp;
+      if(window.XMLHttpRequest){
+        xmlHttp = new XMLHttpRequest();
+      }
+
+      xmlHttp.onreadystatechange = function(){
+        if(xmlHttp.readyState === 4 && xmlHttp.status === 200){
+          resultado.innerHTML = xmlHttp.responseText;
+        }
+      }
+
+      xmlHttp.open("GET","servidor.php?nombre=" + nombre,true);
+      xmlHttp.send();
+
+    }
+
+    function toggleOverlay(elemento){
+      var overlay = document.getElementById('overlay');
+      var informacionUsuario = document.getElementById('informacionUsuario');
+      var info = document.getElementById('info');
+
+      overlay.style.opacity = .6;
+
+      if(overlay.style.display == "block"){
+        overlay.style.display ="none";
+        informacionUsuario.style.display = "none";
+
+      }else{
+        overlay.style.display = "block";
+        informacionUsuario.style.display = "block";
+      }
+
+      var nombre = elemento.innerHTML;
+      var correo = elemento.nextSibling.value;
+
+      info.innerHTML = "<strong>Nombre: </strong>" + nombre + "<br>" + "<strong>Correo: </strong>" + correo;
+    }
+
+
+
+    </script>
+
+  </body>
+</html>
